@@ -1,4 +1,4 @@
-# Research Agent — Personalized Paper Discovery for Academics
+# Paper Radar : A Research Agent that Personalized Paper Discovery for Academics
 
 ## The Problem
 
@@ -16,6 +16,12 @@ So the value is not just faster reading. The value is earlier awareness. We help
 
 This means stronger literature coverage, better novelty positioning, and less wasted time reading papers that do not matter. Instead of another generic feed, the researcher gets a personalized early-warning system for their actual projects.
 
+The system integrates multiple research sources such as GitHub repositories, Overleaf drafts, and academic papers. By combining retrieval, novelty analysis, and local context comparison, the agent can highlight overlapping ideas, surface relevant work, and help researchers decide whether a paper is worth reading in full.
+
+PaperRadar demonstrates how AI agents can move beyond simple automation and become decision-support systems. It transforms the chaotic research workflow into an actionable pipeline: monitor sources, analyze papers, compare with ongoing work, and generate insights.
+
+This project aligns with the “Build Agents That Think” track by implementing a research-focused AI agent system that reasons over multiple sources and produces structured decisions. Instead of just summarizing papers, PaperRadar helps researchers think — identifying novelty, detecting overlap, and guiding research priorities.
+
 ## First-Time Experience
 
 When you first interact with the skill, it runs a 2-minute onboarding:
@@ -30,6 +36,7 @@ Step 6  → Identifies your research strands (2-4 thematic clusters)
 ```
 
 After onboarding, the agent knows your research strands and maps each discovered paper to your specific projects.
+Even without connecting to GitHub or Overleaf, PaperRadar can analyze locally stored research drafts and provide reading recommendations for newly published papers.
 
 ## Feed Format
 
