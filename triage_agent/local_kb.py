@@ -23,12 +23,28 @@ class LocalPaper(BaseModel):
     abstract: str = Field(description="Short description or abstract")
 
 
+class LocalFileSource(BaseModel):
+    """On-disk file to index for RAG (Overleaf mirror, README, notes, etc.)."""
+
+    path: str = Field(description="Absolute or project-root-relative path")
+    id: str = Field(
+        default="",
+        description="Stable id for overlap matches; defaults to a slug from the path",
+    )
+    source: str = Field(default="", description="Human-readable label (e.g. repo name)")
+    type: str = Field(default="local", description="local | overleaf | github | ...")
+
+
 class LocalManifest(BaseModel):
     """Manifest of local papers/drafts."""
 
     papers: list[LocalPaper] = Field(
         default_factory=list,
         description="List of local papers/drafts to compare against",
+    )
+    sources: list[LocalFileSource] = Field(
+        default_factory=list,
+        description="Optional file paths to chunk+embed for vector RAG (see triage_agent.rag)",
     )
 
 

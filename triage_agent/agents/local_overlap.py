@@ -10,6 +10,7 @@ implementation simple and focused.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -20,6 +21,19 @@ from triage_agent.models.paper import PaperCard
 from triage_agent.utils.llm import call_llm_json
 
 logger = logging.getLogger(__name__)
+
+_RAG_MOD_ERROR: str | None = None
+try:  # optional LangChain + Chroma; overlap falls back to manifest-only
+    from triage_agent.rag.retriever import (
+        LocalRAGRetriever,
+        format_retrieved_context,
+        should_use_rag,
+    )
+except ModuleNotFoundError as exc:  # pragma: no cover
+    _RAG_MOD_ERROR = str(exc)
+    should_use_rag = None  # type: ignore[assignment]
+    LocalRAGRetriever = None  # type: ignore[assignment]
+    format_retrieved_context = None  # type: ignore[assignment]
 
 
 LOCAL_SYSTEM_PROMPT = """\
@@ -67,6 +81,51 @@ Return a JSON object with:
 - "overall_relevance": float between 0.0 and 1.0
 """
 
+RAG_SYSTEM_PROMPT = LOCAL_SYSTEM_PROMPT + """
+
+You are also given RETRIEVED RESEARCH CONTEXT from a vector store over the user's
+drafts, notes, and files (the most relevant text chunks to this paper by embedding
+similarity). Use this as primary evidence; use the LOCAL DRAFT INDEX to align local_id
+and titles with manifest entries when possible. If a match only appears in
+retrieved text, set local_id from the [local_id: ...] headers in the context.
+"""
+
+RAG_USER_PROMPT = """\
+TARGET PAPER:
+Title: {title}
+Abstract: {abstract}
+
+RETRIEVED RESEARCH CONTEXT (from vector RAG, top similar chunks to this paper's title+abstract):
+{retrieved_context}
+
+LOCAL DRAFT INDEX (id + title from manifest, if any; prefer these when appropriate):
+{local_index}
+
+Return a JSON object with the same structure as the non-RAG case:
+- "matches" (list with local_id, local_title, relevance, relationship_type, overlap_summary)
+- "overall_relevance" (float 0-1)
+"""
+
+
+def _format_local_index(manifest: LocalManifest) -> str:
+    if not manifest.papers:
+        return (
+            "(No `papers` in manifest; use `local_id` from retrieved context headers only.)"
+        )
+    return "\n".join(f"- id={p.id} | {p.title}" for p in manifest.papers)
+
+
+def _rag_retrieve_text(paper: PaperCard) -> str:
+    """Synchronous: query vector store. Called via asyncio.to_thread from async run."""
+    if not should_use_rag or not LocalRAGRetriever or not format_retrieved_context:
+        return ""
+    if not should_use_rag():
+        return ""
+    r = LocalRAGRetriever()
+    q = f"Title: {paper.title}\n\nAbstract:\n{paper.abstract}"
+    docs = r.retrieve(q)
+    return format_retrieved_context(docs)
+
 
 class LocalOverlapAgent(BaseAgent):
     """Assesses overlap between the target paper and local drafts."""
@@ -82,20 +141,46 @@ class LocalOverlapAgent(BaseAgent):
         with overall_relevance = 0.0.
         """
         manifest = load_local_manifest()
-        if manifest is None or not manifest.papers:
+        if manifest is None:
+            return LocalOverlapReport(matches=[], overall_relevance=0.0)
+        if not manifest.papers and not manifest.sources:
             return LocalOverlapReport(matches=[], overall_relevance=0.0)
 
-        local_list = _format_local_list(manifest)
-
-        user_prompt = LOCAL_USER_PROMPT.format(
-            title=paper.title,
-            abstract=paper.abstract,
-            local_list=local_list,
+        use_rag = bool(
+            _RAG_MOD_ERROR is None
+            and should_use_rag
+            and should_use_rag()  # type: ignore[misc]
         )
+        retrieved = ""
+        if use_rag:
+            try:
+                retrieved = await asyncio.to_thread(_rag_retrieve_text, paper)
+            except Exception as exc:  # pragma: no cover
+                logger.warning("RAG retrieve failed: %s", exc)
+                retrieved = ""
+
+        if use_rag and retrieved.strip():
+            user_prompt = RAG_USER_PROMPT.format(
+                title=paper.title,
+                abstract=paper.abstract,
+                retrieved_context=retrieved,
+                local_index=_format_local_index(manifest),
+            )
+            system_prompt = RAG_SYSTEM_PROMPT
+        elif manifest.papers:
+            # Legacy: full manifest abstract list (RAG off, empty, or not installed)
+            user_prompt = LOCAL_USER_PROMPT.format(
+                title=paper.title,
+                abstract=paper.abstract,
+                local_list=_format_local_list(manifest),
+            )
+            system_prompt = LOCAL_SYSTEM_PROMPT
+        else:
+            return LocalOverlapReport(matches=[], overall_relevance=0.0)
 
         try:
             raw: dict[str, Any] = await call_llm_json(
-                system_prompt=LOCAL_SYSTEM_PROMPT,
+                system_prompt=system_prompt,
                 user_prompt=user_prompt,
             )
         except Exception as exc:  # pragma: no cover - network/pathological errors

@@ -26,6 +26,14 @@ dev = [
     "ruff>=0.8",
     "mypy>=1.13",
 ]
+rag = [
+    "langchain-core>=0.3",
+    "langchain-openai>=0.2",
+    "langchain-chroma>=0.1",
+    "langchain-text-splitters>=0.3",
+    "chromadb>=0.4",
+    "rank-bm25>=0.2",
+]
 notify = [
     "python-telegram-bot>=21.0",
 ]

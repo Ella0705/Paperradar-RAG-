@@ -1,14 +1,3 @@
 {
-    "papers": [
-      {
-        "id": "draft-1",
-        "title": "Draft: LoRA-based PEFT for consumer GPUs",
-        "abstract": "We study parameter-efficient fine-tuning for large language models using low-rank adaptation. We target fast adaptation on consumer GPUs and analyze tradeoffs in rank, memory, and latency."
-      },
-      {
-        "id": "draft-2",
-        "title": "Draft: Emergent abilities in few-shot prompting",
-        "abstract": "We investigate emergent behaviors in few-shot settings for GPT-3-like models, focusing on scaling, task clustering, and prompt sensitivity."
-      }
-    ]
-  }
+  "papers": []
+}

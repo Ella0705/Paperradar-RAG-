@@ -1,7 +1,7 @@
 """Tests for local-overlap parsing and relationship labels."""
 
 from triage_agent.agents.local_overlap import _parse_local_overlap_response
-from triage_agent.local_kb import LocalManifest, LocalPaper
+from triage_agent.local_kb import LocalFileSource, LocalManifest, LocalPaper
 
 
 def test_parse_local_overlap_response_preserves_relationship_type() -> None:
@@ -61,3 +61,12 @@ def test_parse_local_overlap_response_normalizes_unknown_relationship_type() -> 
     )
 
     assert report.matches[0].relationship_type == "related"
+
+
+def test_local_manifest_accepts_rag_file_sources() -> None:
+    m = LocalManifest(
+        papers=[],
+        sources=[LocalFileSource(path="notes/draft.md", id="d1", source="notes", type="local")],
+    )
+    assert m.sources[0].path == "notes/draft.md"
+    assert m.sources[0].id == "d1"
