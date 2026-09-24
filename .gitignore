@@ -21,6 +21,9 @@ env/
 # Environment
 .env
 
+# Local RAG index (Chroma)
+local_kb/chroma_index/
+
 # Output
 output/
 out/

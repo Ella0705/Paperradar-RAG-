@@ -39,8 +39,12 @@ PROJECT_ROOT = _discover_project_root()
 if PROJECT_ROOT and str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-# Skill defaults: use OpenClaw runtime backend (no direct provider key env needed).
-if shutil.which("openclaw"):
+# Prefer direct provider when key is present (so Docker/OpenClaw can use real LLM).
+if os.getenv("OPENAI_API_KEY"):
+    os.environ.setdefault("LLM_BACKEND", "openai")
+elif os.getenv("ANTHROPIC_API_KEY"):
+    os.environ.setdefault("LLM_BACKEND", "anthropic")
+elif shutil.which("openclaw"):
     os.environ.setdefault("LLM_BACKEND", "openclaw")
     os.environ.setdefault("OPENCLAW_LLM_AGENT", "main")
 

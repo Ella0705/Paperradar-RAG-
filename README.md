@@ -72,6 +72,16 @@ Input (arXiv URL/ID or "pull me papers")
 Output (Discord / Telegram / CLI)
 ```
 
+## Recent improvements (local RAG layer)
+
+The multi-agent triage pipeline (Retriever / Novelty / Local Overlap + Assembler) is unchanged from the hackathon baseline. **Retrieval for `LocalOverlapAgent` was upgraded** in three ways:
+
+1. **Structure-aware LaTeX chunking** — `.tex` sources are split on `\section` boundaries before secondary character splitting; section titles are stored in metadata and prefixed in chunk text so hits can be attributed (e.g. Related Work).
+2. **MMR retrieval** — vector search uses Maximal Marginal Relevance so top-k chunks stay relevant to the query without repeating near-duplicate passages.
+3. **Hybrid BM25 + vector (RRF)** — dense embeddings and BM25 keyword search run in parallel; results are fused with reciprocal rank fusion so terms like “LoRA” or “BitFit” remain discoverable alongside semantic matches.
+
+Rebuild the index after changing sources: `python -m triage_agent.rag.build_index` (requires `pip install -e ".[rag]"` and `OPENAI_API_KEY`).
+
 ## Setup
 
 ```bash
@@ -98,10 +108,34 @@ Without `gh`, the agent falls back to the public GitHub API (public repos only).
 
 ## Configuration
 
-- **Default backend is OpenClaw runtime** (`LLM_BACKEND=openclaw`).
-- **Inside OpenClaw**: no direct provider keys required.
+- **Default backend is OpenClaw runtime** (`LLM_BACKEND=openclaw`) when no provider key is set.
+- **When `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` is set**, the skill uses that provider (so Docker/OpenClaw can run real LLM instead of stub).
 - **Standalone CLI**: optionally set `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`.
 - `SEMANTIC_SCHOLAR_API_KEY` optional but recommended.
+
+### Using real OpenAI in OpenClaw / Discord (Docker)
+
+If the bot runs in stub/offline mode (“TRIAGE_STUB_SUMMARIES” or “no usable LLM backend”), do the following:
+
+1. **Pass your key into the container**  
+   In the service that runs the skill (e.g. OpenClaw Docker Compose), add environment variables:
+   - `OPENAI_API_KEY=<your-key>`  
+   - Optional but recommended: `LLM_BACKEND=openai` (the skill will prefer OpenAI when the key is present anyway).
+
+2. **Where to set them**  
+   - **Docker Compose**: under the relevant service, add `environment:` with `OPENAI_API_KEY` and optionally `LLM_BACKEND=openai`, or use `env_file: .env` and put the key in a `.env` file (do not commit it).
+   - **OpenClaw gateway/config**: if your Discord bot is started by OpenClaw, set the same variables in the environment that starts the OpenClaw process (e.g. in the same `docker-compose` service or in a `.env` loaded by Compose).
+
+3. **Restart and test**  
+   Restart the container/compose, then trigger the skill again (e.g. `/research-agent 2301.07041`). Check logs: you should see real LLM calls (and no “stub” or “TRIAGE_STUB_SUMMARIES” from this repo; if that message still appears, it is from OpenClaw’s side and may need to be turned off in OpenClaw’s config).
+
+4. **Quick local check**  
+   To confirm the skill uses OpenAI when the key is set, run locally:
+   ```bash
+   export OPENAI_API_KEY=sk-...
+   python skill/scripts/run_triage.py 2301.07041 --format markdown
+   ```
+   You should get a full memo (not stub text).
 
 ## Usage
 
