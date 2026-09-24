@@ -220,3 +220,7 @@ pytest tests/ -q
 - Paper understanding is abstract-first (no PDF parsing)
 - Semantic Scholar may throttle without an API key
 - Overleaf enrollment requires an explicit Git mirror URL and token
+
+## Credits
+
+This project originated as a hackathon collaboration with [@AustinJunyuLi](https://github.com/AustinJunyuLi) (original repo: [hackathon-research-agent](https://github.com/AustinJunyuLi/hackathon-research-agent)). The RAG retrieval layer — structure-aware LaTeX chunking, MMR diversity retrieval, and BM25 + RRF hybrid retrieval — and subsequent improvements are developed and maintained independently by [@Ella0705](https://github.com/Ella0705).
