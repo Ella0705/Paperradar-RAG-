@@ -1,0 +1,4376 @@
+{
+  "config": {
+    "timestamp_utc": "2026-10-22T13:06:31+00:00",
+    "git_commit": "b293214fc8f38ca1fe9255b4c069b5d490bedaaf",
+    "git_dirty_tracked_files": false,
+    "modes": [
+      "vector",
+      "bm25",
+      "hybrid"
+    ],
+    "reranker": "none",
+    "chunking": {
+      "chunk_size": 800,
+      "chunk_overlap": 120,
+      "latex_section_split": true,
+      "n_chunks": 57
+    },
+    "retrieval": {
+      "retrieve_k": 10,
+      "recall_k": 5,
+      "mrr_k": 10,
+      "fetch_k": 20,
+      "mmr_lambda": 0.5,
+      "rrf_k": 60,
+      "embedding_model": "text-embedding-3-small",
+      "latency_note": "per query, warm-up excluded; includes OpenAI query-embedding round trip for vector/hybrid"
+    },
+    "inputs": {
+      "golden_sha256": "f0c2c31053a736826483c9c3939fdb40f34952112bd17f2d33133d6fd9427885",
+      "n_queries": 20,
+      "manifest_sha256": "ed0da186d996d419ba0314b206497ffc983484e830c753ed3c1043f6df261452",
+      "corpus_sha256": {
+        "diffusion.tex": "aafded48139fd3378df30beffa1b39682ccf54787db600a02bb084c1191a64c9",
+        "fedlearn.tex": "00186d5a5f143fe57814f45cf41c3b428ea4befb9b7a3950e627d9a630e2eb49",
+        "gnn.tex": "7dd5dffc446ed7cdedd36e019924711fbaef705703d8f7f81dd798640f260104",
+        "peft.tex": "62383079479e4bcad3ebc8af9ff047eaead45d3b36da9b2f907e761785c20c2c",
+        "rl_trading.tex": "19c862e2c6f5d1672e1ef84d80f4161205b78c77606277c934479381827cf7d4"
+      }
+    },
+    "python": "3.14.3"
+  },
+  "results": {
+    "vector": {
+      "summary": {
+        "recall@5": 1.0,
+        "mrr@10": 1.0,
+        "rejection_rate": 0.0,
+        "latency_ms_mean": 245.03000000000003,
+        "latency_ms_p50": 180.45,
+        "latency_ms_max": 1452.05,
+        "n_answerable": 15,
+        "n_rejection": 5
+      },
+      "per_query": [
+        {
+          "query_id": "q01",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1452.05,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Sensitivity Score",
+              "preview": "[Sensitivity Score] For each LoRA module $m$ we maintain an exponential moving a"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            }
+          ]
+        },
+        {
+          "query_id": "q02",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 196.6,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Sensitivity Score",
+              "preview": "[Sensitivity Score] For each LoRA module $m$ we maintain an exponential moving a"
+            }
+          ]
+        },
+        {
+          "query_id": "q03",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 188.65,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Sensitivity Score",
+              "preview": "[Sensitivity Score] For each LoRA module $m$ we maintain an exponential moving a"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            }
+          ]
+        },
+        {
+          "query_id": "q04",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 150.15,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "generation. Classifier-free guidance trades diversity for fidelity by\nextrapolat"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            }
+          ]
+        },
+        {
+          "query_id": "q05",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 202.49,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "generation. Classifier-free guidance trades diversity for fidelity by\nextrapolat"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            }
+          ]
+        },
+        {
+          "query_id": "q06",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 155.02,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "Risk Constraint",
+              "preview": "[Risk Constraint] We require the conditional value-at-risk at level $\\alpha$ of "
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            }
+          ]
+        },
+        {
+          "query_id": "q07",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 208.07,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            }
+          ]
+        },
+        {
+          "query_id": "q08",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 178.85,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 8,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            }
+          ]
+        },
+        {
+          "query_id": "q09",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 219.46,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            },
+            {
+              "rank": 10,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            }
+          ]
+        },
+        {
+          "query_id": "q10",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 173.52,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            }
+          ]
+        },
+        {
+          "query_id": "q11",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 163.83,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            }
+          ]
+        },
+        {
+          "query_id": "q12",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 169.82,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "generation. Classifier-free guidance trades diversity for fidelity by\nextrapolat"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            }
+          ]
+        },
+        {
+          "query_id": "q13",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 171.99,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            }
+          ]
+        },
+        {
+          "query_id": "q14",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 176.91,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Shared Representation and Local Heads",
+              "preview": "[Shared Representation and Local Heads] Each client model is $h_i \\circ \\phi$, w"
+            }
+          ]
+        },
+        {
+          "query_id": "q15",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 184.33,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 8,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Shared Representation and Local Heads",
+              "preview": "[Shared Representation and Local Heads] Each client model is $h_i \\circ \\phi$, w"
+            },
+            {
+              "rank": 10,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            }
+          ]
+        },
+        {
+          "query_id": "q16",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 174.1,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            }
+          ]
+        },
+        {
+          "query_id": "q17",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 182.05,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Problem Formulation",
+              "preview": "[Problem Formulation]"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            }
+          ]
+        },
+        {
+          "query_id": "q18",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 195.89,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            }
+          ]
+        },
+        {
+          "query_id": "q19",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 171.86,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Limitations",
+              "preview": "[Limitations] Curvature computation scales with the number of edges times node d"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            }
+          ]
+        },
+        {
+          "query_id": "q20",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 184.96,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Client-Level Differential Privacy",
+              "preview": "[Client-Level Differential Privacy] Each uploaded encoder update is clipped to n"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            }
+          ]
+        }
+      ]
+    },
+    "bm25": {
+      "summary": {
+        "recall@5": 1.0,
+        "mrr@10": 1.0,
+        "rejection_rate": 0.0,
+        "latency_ms_mean": 1.3915,
+        "latency_ms_p50": 1.3050000000000002,
+        "latency_ms_max": 2.28,
+        "n_answerable": 15,
+        "n_rejection": 5
+      },
+      "per_query": [
+        {
+          "query_id": "q01",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 2.28,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            }
+          ]
+        },
+        {
+          "query_id": "q02",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.83,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            }
+          ]
+        },
+        {
+          "query_id": "q03",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.09,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            }
+          ]
+        },
+        {
+          "query_id": "q04",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 0.75,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            }
+          ]
+        },
+        {
+          "query_id": "q05",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 0.85,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            }
+          ]
+        },
+        {
+          "query_id": "q06",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 0.94,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            }
+          ]
+        },
+        {
+          "query_id": "q07",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 0.81,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 8,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 10,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            }
+          ]
+        },
+        {
+          "query_id": "q08",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.08,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            }
+          ]
+        },
+        {
+          "query_id": "q09",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.41,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            }
+          ]
+        },
+        {
+          "query_id": "q10",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.66,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            }
+          ]
+        },
+        {
+          "query_id": "q11",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.35,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            }
+          ]
+        },
+        {
+          "query_id": "q12",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 1.26,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Skipping-Step Schedule",
+              "preview": "[Skipping-Step Schedule] Using a skip interval $k > 1$ reduces the number of dis"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            }
+          ]
+        },
+        {
+          "query_id": "q13",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 2.13,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Shared Representation and Local Heads",
+              "preview": "[Shared Representation and Local Heads] Each client model is $h_i \\circ \\phi$, w"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            }
+          ]
+        },
+        {
+          "query_id": "q14",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 2.19,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 8,
+              "local_id": "fedlearn",
+              "section": "Client-Level Differential Privacy",
+              "preview": "[Client-Level Differential Privacy] Each uploaded encoder update is clipped to n"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            }
+          ]
+        },
+        {
+          "query_id": "q15",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 0.94,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            }
+          ]
+        },
+        {
+          "query_id": "q16",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 1.92,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            }
+          ]
+        },
+        {
+          "query_id": "q17",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 0.89,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            }
+          ]
+        },
+        {
+          "query_id": "q18",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 1.88,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            }
+          ]
+        },
+        {
+          "query_id": "q19",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 1.46,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            }
+          ]
+        },
+        {
+          "query_id": "q20",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 1.11,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Risk Constraint",
+              "preview": "[Risk Constraint] We require the conditional value-at-risk at level $\\alpha$ of "
+            }
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "summary": {
+        "recall@5": 1.0,
+        "mrr@10": 1.0,
+        "rejection_rate": 0.0,
+        "latency_ms_mean": 179.42249999999999,
+        "latency_ms_p50": 172.14,
+        "latency_ms_max": 234.91,
+        "n_answerable": 15,
+        "n_rejection": 5
+      },
+      "per_query": [
+        {
+          "query_id": "q01",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 171.47,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Sensitivity Score",
+              "preview": "[Sensitivity Score] For each LoRA module $m$ we maintain an exponential moving a"
+            }
+          ]
+        },
+        {
+          "query_id": "q02",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 184.62,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            }
+          ]
+        },
+        {
+          "query_id": "q03",
+          "relevant_draft_ids": [
+            "peft"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 168.75,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a sensitivity-guided rank allocation scheme that\ngrow"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "Low-rank adaptation (LoRA) injects a trainable low-rank decomposition\n$\\Delta W "
+            },
+            {
+              "rank": 5,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            }
+          ]
+        },
+        {
+          "query_id": "q04",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 171.01,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            }
+          ]
+        },
+        {
+          "query_id": "q05",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 197.05,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            }
+          ]
+        },
+        {
+          "query_id": "q06",
+          "relevant_draft_ids": [
+            "rl_trading"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 153.35,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            },
+            {
+              "rank": 2,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nWe study deep reinforcement learning agents for two financial d"
+            },
+            {
+              "rank": 3,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to train in a market simulator replaying historical "
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "State, Action and Reward",
+              "preview": "[State, Action and Reward] The state contains a window of past log returns, tech"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            }
+          ]
+        },
+        {
+          "query_id": "q07",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 171.37,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            }
+          ]
+        },
+        {
+          "query_id": "q08",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 184.69,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            }
+          ]
+        },
+        {
+          "query_id": "q09",
+          "relevant_draft_ids": [
+            "gnn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 234.91,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "[Introduction] Graphs model relational data such as citation networks, social ne"
+            },
+            {
+              "rank": 5,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 6,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Initial-Residual Message Passing",
+              "preview": "[Initial-Residual Message Passing] Each layer computes $H^{(l+1)} = \\sigma\\big(("
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            }
+          ]
+        },
+        {
+          "query_id": "q10",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 191.99,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 7,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Introduction",
+              "preview": "[Introduction] Pretrained transformer language models are routinely adapted to i"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            }
+          ]
+        },
+        {
+          "query_id": "q11",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 169.2,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to fine-tune decoder-only models of several sizes on"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            }
+          ]
+        },
+        {
+          "query_id": "q12",
+          "relevant_draft_ids": [
+            "diffusion"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 169.57,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to distil a pretrained text-to-image latent diffusio"
+            },
+            {
+              "rank": 4,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a guidance-aware consistency distillation objective\nt"
+            },
+            {
+              "rank": 6,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "Latent diffusion models run this process in the latent space of a pretrained\nvar"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Limitations",
+              "preview": "[Limitations] Distilled students inherit the biases of the teacher model. One-st"
+            },
+            {
+              "rank": 8,
+              "local_id": "diffusion",
+              "section": "Skipping-Step Schedule",
+              "preview": "[Skipping-Step Schedule] Using a skip interval $k > 1$ reduces the number of dis"
+            },
+            {
+              "rank": 9,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            }
+          ]
+        },
+        {
+          "query_id": "q13",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 166.87,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Related Work",
+              "preview": "[Related Work] Early work applied recurrent reinforcement learning to optimize t"
+            }
+          ]
+        },
+        {
+          "query_id": "q14",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 197.34,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Two failure modes limit depth. Over-smoothing arises because repeated\nneighbourh"
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            }
+          ]
+        },
+        {
+          "query_id": "q15",
+          "relevant_draft_ids": [
+            "fedlearn"
+          ],
+          "recall@5": 1.0,
+          "rr@10": 1.0,
+          "correctly_rejected": null,
+          "latency_ms": 176.39,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFederated learning trains a shared model across many clients, s"
+            },
+            {
+              "rank": 2,
+              "local_id": "fedlearn",
+              "section": "Related Work",
+              "preview": "[Related Work] FedAvg was introduced for communication-efficient learning from d"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 5,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 7,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a personalized FedAvg variant in which only the\nshare"
+            },
+            {
+              "rank": 8,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            },
+            {
+              "rank": 9,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 10,
+              "local_id": "diffusion",
+              "section": "Introduction",
+              "preview": "[Introduction] Diffusion models define a forward process that adds Gaussian nois"
+            }
+          ]
+        },
+        {
+          "query_id": "q16",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 172.81,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 3,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "Limitations",
+              "preview": "[Limitations] The sensitivity score adds a small overhead per step. Rank changes"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            }
+          ]
+        },
+        {
+          "query_id": "q17",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 170.08,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 4,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Risk Constraint",
+              "preview": "[Risk Constraint] We require the conditional value-at-risk at level $\\alpha$ of "
+            },
+            {
+              "rank": 6,
+              "local_id": "fedlearn",
+              "section": "Communication Compression",
+              "preview": "[Communication Compression] Clients transmit only the top-$k$ coordinates of the"
+            },
+            {
+              "rank": 7,
+              "local_id": "diffusion",
+              "section": "Skipping-Step Schedule",
+              "preview": "[Skipping-Step Schedule] Using a skip interval $k > 1$ reduces the number of dis"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Limitations",
+              "preview": "[Limitations] Keeping heads local means new clients need a warm-up phase. Differ"
+            },
+            {
+              "rank": 10,
+              "local_id": "gnn",
+              "section": "Curvature-Guided Rewiring",
+              "preview": "[Curvature-Guided Rewiring] We compute the balanced Forman curvature of every ed"
+            }
+          ]
+        },
+        {
+          "query_id": "q18",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 164.22,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 2,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 3,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 4,
+              "local_id": "fedlearn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to simulate federated settings with Dirichlet label "
+            },
+            {
+              "rank": 5,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a constrained MDP formulation of portfolio\nallocation"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 7,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 8,
+              "local_id": "peft",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nFull fine-tuning of large language models updates billions of p"
+            },
+            {
+              "rank": 9,
+              "local_id": "diffusion",
+              "section": "(preamble)",
+              "preview": "[(preamble)] % SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in ev"
+            },
+            {
+              "rank": 10,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "Three practical issues motivate this work. First, statistical heterogeneity:\ncli"
+            }
+          ]
+        },
+        {
+          "query_id": "q19",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 194.4,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Related Work",
+              "preview": "[Related Work] Over-smoothing has been analysed through the spectrum of the norm"
+            },
+            {
+              "rank": 2,
+              "local_id": "peft",
+              "section": "Related Work",
+              "preview": "[Related Work] Adapters insert small bottleneck feed-forward modules between tra"
+            },
+            {
+              "rank": 3,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 4,
+              "local_id": "rl_trading",
+              "section": "Limitations",
+              "preview": "[Limitations] Simulator calibration determines how well policies transfer to liv"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 6,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 8,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 9,
+              "local_id": "gnn",
+              "section": "(preamble)",
+              "preview": "\\begin{abstract}\nMessage-passing graph neural networks (GNNs) learn node represe"
+            },
+            {
+              "rank": 10,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            }
+          ]
+        },
+        {
+          "query_id": "q20",
+          "relevant_draft_ids": [],
+          "recall@5": null,
+          "rr@10": null,
+          "correctly_rejected": false,
+          "latency_ms": 178.36,
+          "retrieved": [
+            {
+              "rank": 1,
+              "local_id": "gnn",
+              "section": "Introduction",
+              "preview": "Our contributions are: (1) a rewiring procedure that adds edges across\nnegativel"
+            },
+            {
+              "rank": 2,
+              "local_id": "diffusion",
+              "section": "Related Work",
+              "preview": "[Related Work] DDPM introduced the denoising objective with a fixed variance sch"
+            },
+            {
+              "rank": 3,
+              "local_id": "peft",
+              "section": "Interaction with Quantization",
+              "preview": "[Interaction with Quantization] When the frozen backbone is quantized, quantizat"
+            },
+            {
+              "rank": 4,
+              "local_id": "gnn",
+              "section": "Experimental Plan",
+              "preview": "[Experimental Plan] We plan to evaluate on homophilous citation graphs, heteroph"
+            },
+            {
+              "rank": 5,
+              "local_id": "diffusion",
+              "section": "Guidance-Aware Consistency Distillation",
+              "preview": "[Guidance-Aware Consistency Distillation] Let $f_\\theta(x_t, t, c)$ be the stude"
+            },
+            {
+              "rank": 6,
+              "local_id": "rl_trading",
+              "section": "Introduction",
+              "preview": "[Introduction] Algorithmic trading systems must make sequential decisions under "
+            },
+            {
+              "rank": 7,
+              "local_id": "rl_trading",
+              "section": "Method",
+              "preview": "[Method] The policy and critic share a temporal convolutional encoder over the r"
+            },
+            {
+              "rank": 8,
+              "local_id": "rl_trading",
+              "section": "Risk Constraint",
+              "preview": "[Risk Constraint] We require the conditional value-at-risk at level $\\alpha$ of "
+            },
+            {
+              "rank": 9,
+              "local_id": "fedlearn",
+              "section": "Introduction",
+              "preview": "[Introduction] In cross-device federated learning, a central server coordinates "
+            },
+            {
+              "rank": 10,
+              "local_id": "peft",
+              "section": "Rank Budget Reallocation",
+              "preview": "[Rank Budget Reallocation] Every $T$ optimizer steps, we rank all modules by sen"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
