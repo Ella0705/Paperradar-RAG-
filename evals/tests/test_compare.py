@@ -9,6 +9,8 @@ def _query(query_id: str, relevant: list[str], rr: float | None) -> dict:
         "relevant_draft_ids": relevant,
         "recall@5": None if rr is None else float(rr > 0),
         "rr@10": rr,
+        "precision@5": None if rr is None else 0.4,
+        "ndcg@5": None if rr is None else 0.5,
         "correctly_rejected": False if not relevant else None,
         "latency_ms": 10.0,
     }
@@ -37,6 +39,6 @@ def test_old_set_row_scores_only_old_query_ids() -> None:
 
     assert len(rows) == 3
     old_row, new_row, subset_row = rows
-    assert "5 drafts / 50 chunks | 1+1 | 1.000 | 1.000" in old_row
-    assert "8 drafts / 90 chunks | 2+1 | 1.000 | 0.750" in new_row
-    assert "8 drafts / 90 chunks | 1+1 | 1.000 | 1.000" in subset_row
+    assert "5 drafts / 50 chunks | 1+1 | 1.000 | 1.000 | 0.400 | 0.500 | 0.000" in old_row
+    assert "8 drafts / 90 chunks | 2+1 | 1.000 | 0.750 | 0.400 | 0.500 | 0.000" in new_row
+    assert "8 drafts / 90 chunks | 1+1 | 1.000 | 1.000 | 0.400 | 0.500 | 0.000" in subset_row

@@ -6,6 +6,9 @@ Rows for each mode:
   new (old set)  the new run scored only on the old run's query ids,
                  so corpus changes can be separated from query-set changes
 
+Result files from before Precision/nDCG existed must go through
+evals/rescore.py first; pass the *.rescored.json files.
+
 Usage:
     python -m evals.compare evals/results/<old>.json evals/results/<new>.json
 """
@@ -29,7 +32,8 @@ def _row(mode: str, label: str, corpus: str, summary: dict[str, Any]) -> str:
     n_scored = f"{summary['n_answerable']}+{summary['n_rejection']}"
     return (
         f"| {mode} | {label} | {corpus} | {n_scored} | {_fmt(summary['recall@5'])} "
-        f"| {_fmt(summary['mrr@10'])} | {_fmt(summary['rejection_rate'])} "
+        f"| {_fmt(summary['mrr@10'])} | {_fmt(summary['precision@5'])} "
+        f"| {_fmt(summary['ndcg@5'])} | {_fmt(summary['rejection_rate'])} "
         f"| {_fmt(summary['latency_ms_mean'], 1)} |"
     )
 
@@ -38,8 +42,8 @@ def compare(old: dict[str, Any], new: dict[str, Any]) -> str:
     old_corpus, new_corpus = _corpus(old["config"]), _corpus(new["config"])
     lines = [
         "| mode | round | corpus | queries (answerable+rejection) | Recall@5 | MRR@10 "
-        "| rejection rate | mean latency (ms) |",
-        "|---|---|---|---|---|---|---|---|",
+        "| Precision@5 | nDCG@5 | rejection rate | mean latency (ms) |",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for mode in new["results"]:
         if mode not in old["results"]:
