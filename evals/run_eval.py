@@ -28,7 +28,8 @@ import statistics
 import subprocess
 import sys
 import time
-from collections.abc import Callable
+from collections import Counter
+from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
 from inspect import signature
 from pathlib import Path
@@ -36,7 +37,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from evals.metrics import correctly_rejected, mean_defined, recall_at_k, reciprocal_rank_at_k
+from evals.metrics import MRR_K, NDCG_K, PRECISION_K, RECALL_K, mean_defined, score_query
 from evals.rerankers import RERANKER_CHOICES, Reranker, get_reranker
 from triage_agent.rag.build_index import _DEFAULT_CHUNK, _DEFAULT_OVERLAP, build_index
 from triage_agent.rag.hybrid import Bm25Index, rrf_merge
@@ -57,8 +58,6 @@ RESULTS_DIR = EVALS_DIR / "results"
 
 MODES = ("vector", "bm25", "hybrid")
 RETRIEVE_K = 10  # chunks fetched per query; enough for MRR@10
-RECALL_K = 5
-MRR_K = 10
 
 # Excluded from scoring and timing: loads Chroma and fills the BM25 cache.
 WARMUP_QUERY = "Title: warm-up\n\nAbstract:\nwarm-up query, not scored"
@@ -140,6 +139,7 @@ def run_mode(
     retriever: LocalRAGRetriever,
     reranker: Reranker,
     warnings: _WarningCollector,
+    chunks_per_draft: Mapping[str, int],
 ) -> list[dict[str, Any]]:
     search = make_searcher(mode, retriever)
     search(WARMUP_QUERY)
@@ -159,9 +159,7 @@ def run_mode(
             {
                 "query_id": row["query_id"],
                 "relevant_draft_ids": relevant,
-                "recall@5": recall_at_k(ranked_ids, relevant, RECALL_K),
-                "rr@10": reciprocal_rank_at_k(ranked_ids, relevant, MRR_K),
-                "correctly_rejected": correctly_rejected(ranked_ids, relevant),
+                **score_query(ranked_ids, relevant, chunks_per_draft),
                 "latency_ms": round(latency_ms, 2),
                 "retrieved": [
                     {
@@ -182,6 +180,8 @@ def summarize(per_query: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "recall@5": mean_defined(q["recall@5"] for q in per_query),
         "mrr@10": mean_defined(q["rr@10"] for q in per_query),
+        "precision@5": mean_defined(q["precision@5"] for q in per_query),
+        "ndcg@5": mean_defined(q["ndcg@5"] for q in per_query),
         "rejection_rate": mean_defined(q["correctly_rejected"] for q in per_query),
         "latency_ms_mean": statistics.fmean(latencies),
         "latency_ms_p50": statistics.median(latencies),
@@ -205,6 +205,7 @@ def config_snapshot(
     modes: list[str],
     reranker_name: str,
     n_chunks: int,
+    chunks_per_draft: Mapping[str, int],
     embedding_model: str,
     golden: list[dict[str, Any]],
 ) -> dict[str, Any]:
@@ -221,11 +222,14 @@ def config_snapshot(
             "chunk_overlap": int(os.getenv("RAG_CHUNK_OVERLAP", str(_DEFAULT_OVERLAP))),
             "latex_section_split": True,
             "n_chunks": n_chunks,
+            "chunks_per_draft": dict(sorted(chunks_per_draft.items())),
         },
         "retrieval": {
             "retrieve_k": RETRIEVE_K,
             "recall_k": RECALL_K,
             "mrr_k": MRR_K,
+            "precision_k": PRECISION_K,
+            "ndcg_k": NDCG_K,
             "fetch_k": fetch_k,
             "mmr_lambda": float(os.getenv("RAG_MMR_LAMBDA", str(_DEFAULT_MMR_LAMBDA))),
             "rrf_k": signature(rrf_merge).parameters["k"].default,
@@ -249,20 +253,22 @@ def _fmt(value: float | None, digits: int = 3) -> str:
 
 def markdown_table(summaries: dict[str, dict[str, Any]], reranker_name: str) -> str:
     lines = [
-        "| mode | reranker | Recall@5 | MRR@10 | rejection rate | mean latency (ms) "
-        "| p50 latency (ms) |",
-        "|---|---|---|---|---|---|---|",
+        "| mode | reranker | Recall@5 | MRR@10 | Precision@5 | nDCG@5 | rejection rate "
+        "| mean latency (ms) | p50 latency (ms) |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for mode, s in summaries.items():
         lines.append(
             f"| {mode} | {reranker_name} | {_fmt(s['recall@5'])} | {_fmt(s['mrr@10'])} "
+            f"| {_fmt(s['precision@5'])} | {_fmt(s['ndcg@5'])} "
             f"| {_fmt(s['rejection_rate'])} | {_fmt(s['latency_ms_mean'], 1)} "
             f"| {_fmt(s['latency_ms_p50'], 1)} |"
         )
     any_summary = next(iter(summaries.values()))
     lines.append("")
     lines.append(
-        f"Recall@5 / MRR@10 are means over {any_summary['n_answerable']} answerable queries; "
+        f"Recall@5 / MRR@10 / Precision@5 / nDCG@5 are means over "
+        f"{any_summary['n_answerable']} answerable queries; "
         f"rejection rate is over {any_summary['n_rejection']} rejection queries "
         "(correct iff nothing is returned)."
     )
@@ -291,16 +297,22 @@ def main(argv: list[str] | None = None) -> int:
 
     golden = load_golden(GOLDEN_PATH)
     retriever = LocalRAGRetriever(k=RETRIEVE_K, persist_directory=INDEX_DIR)
+    # nDCG needs how many relevant chunks exist per draft.
+    indexed_chunks = _all_chunks_from_store(retriever.vectorstore)
+    chunks_per_draft = Counter(str(doc.metadata.get("local_id", "")) for doc in indexed_chunks)
+    warnings.raise_if_any("could not read chunks from the eval index")
 
     results: dict[str, Any] = {}
     for mode in args.mode:
-        per_query = run_mode(mode, golden, retriever, reranker, warnings)
+        per_query = run_mode(mode, golden, retriever, reranker, warnings, chunks_per_draft)
         results[mode] = {"summary": summarize(per_query), "per_query": per_query}
         print(f"[{mode}] done")
 
     summaries = {mode: r["summary"] for mode, r in results.items()}
     table = markdown_table(summaries, args.reranker)
-    snapshot = config_snapshot(args.mode, args.reranker, n_chunks, embedding_model, golden)
+    snapshot = config_snapshot(
+        args.mode, args.reranker, n_chunks, chunks_per_draft, embedding_model, golden
+    )
 
     RESULTS_DIR.mkdir(exist_ok=True)
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
