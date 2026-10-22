@@ -15,6 +15,7 @@ here modifies existing modules or `local_kb/`.
 | `compare.py` | Side-by-side table of two result files, incl. the new run on the old query set |
 | `rescore.py` | Recomputes all metrics offline from stored rankings → `*.rescored.json` |
 | `analysis.py` | Distractor-intrusion counts and per-query RRF traces from stored rankings |
+| `bootstrap.py` | Paired bootstrap 95% CIs for Precision@5 and bm25 − vector |
 | `results/` | Timestamped JSON (config snapshot + per-query rankings) and Markdown tables |
 | `reports/` | Written reports; every table is pasted from the scripts above |
 

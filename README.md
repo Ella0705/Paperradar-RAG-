@@ -89,6 +89,50 @@ The multi-agent triage pipeline (Retriever / Novelty / Local Overlap + Assembler
 
 Rebuild the index after changing sources: `python -m triage_agent.rag.build_index` (requires `pip install -e ".[rag]"` and `OPENAI_API_KEY`).
 
+## Evaluation
+
+`evals/` holds a reproducible benchmark for the retrieval layer. It calls the existing retriever as-is and never touches `local_kb/`.
+
+- **Corpus**: 8 synthetic LaTeX drafts. Five are on clearly separate topics (PEFT, RL trading, GNNs, diffusion, federated learning). Three are near-topic distractors, each paired with one of those five: LLM quantization vs PEFT, GANs vs diffusion, multi-agent RL in games vs RL trading. The eval builds its own index in `evals/.index/`.
+- **Queries**: 32 real arXiv papers (title + abstract), pinned by versioned id and human-reviewed. 27 are labelled with exactly one relevant draft; 12 of those are boundary papers chosen to sit between a draft and its distractor. The other 5 are unrelated, to test rejection.
+- **Modes**: `vector` (MMR, `RAG_HYBRID=0`), `bm25`, `hybrid` (MMR + BM25 fused with RRF, the default).
+- **Metrics**: computed on retrieved chunks, scored against draft labels: Recall@5, MRR@10, Precision@5, nDCG@5, rejection rate, and per-query latency.
+
+Final run (8 drafts / 93 chunks, 27 answerable + 5 rejection queries, reranker `none`):
+
+| mode | Recall@5 | MRR@10 | Precision@5 (95% CI) | nDCG@5 | rejection rate | mean latency (ms) |
+|---|---|---|---|---|---|---|
+| vector | 1.000 | 1.000 | 0.904 [0.852, 0.956] | 0.927 | 0.000 | 211.1 |
+| bm25 | 1.000 | 0.981 | 0.859 [0.800, 0.911] | 0.887 | 0.000 | 1.8 |
+| hybrid | 1.000 | 1.000 | 0.904 [0.859, 0.941] | 0.930 | 0.000 | 202.1 |
+
+CIs come from a paired bootstrap: 10,000 resamples of the answerable queries. Recall@5 and MRR@10 saturate on this corpus; only Precision@5 and nDCG@5 move once the distractors are added.
+
+**Key findings**
+
+1. **BM25 is the most fragile mode on near-topic queries, but the gap is directional, not significant.** On the 12 boundary queries, rival-draft chunks fill 15 of 60 top-5 slots for BM25, against 11 for vector and 12 for hybrid. BM25 also makes the only rank-1 error: on q23 (LQER) it ranks a LoRA-plus-quantization chunk above the quantization draft. Its Precision@5 trails vector by 0.044, but the paired 95% CI on that difference, [-0.111, +0.015], includes 0.
+2. **Vector and hybrid are effectively tied.** Their Precision@5 is identical (0.904) and their nDCG@5 is 0.927 vs 0.930. Hybrid's only "fix" of a BM25 error (q23) is an exact RRF tie (1/61 + 1/64 for both chunks) that `rrf_merge`'s stable sort resolves in favour of the vector list. So on this set, RRF fusion shows no measurable gain over vector search alone.
+
+**Limitations**
+
+- 27 scored queries support directional conclusions only, not significance.
+- The drafts are short, synthetic and cleanly structured, and the topic boundaries are designed on purpose. Absolute scores will not transfer to a real knowledge base. Two queries are known easy cases: q03 matches its draft's method, and q27 is cited by name in its draft.
+- Rejection rate is 0 because the retriever has no score threshold; every query returns 10 chunks.
+- Vector and hybrid latency includes an OpenAI embedding round trip per query, so it mostly reflects network time. BM25 runs locally.
+
+**Reproduce**
+
+```bash
+python -m evals.run_eval                    # rebuilds evals/.index, runs all modes (needs OPENAI_API_KEY)
+python -m evals.rescore evals/results/<run>.json
+python -m evals.compare <old>.rescored.json <new>.rescored.json
+python -m evals.analysis <run>.rescored.json --trace q23
+python -m evals.bootstrap <run>.rescored.json
+pytest tests evals/tests -q
+```
+
+Full write-up: [`evals/reports/round1_vs_round2.md`](evals/reports/round1_vs_round2.md). Details on scoring and files: [`evals/README.md`](evals/README.md).
+
 ## Setup
 
 ```bash
