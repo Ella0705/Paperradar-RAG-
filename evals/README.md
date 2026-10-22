@@ -13,7 +13,10 @@ here modifies existing modules or `local_kb/`.
 | `rerankers.py` | Reranker hook: `none` (identity); `jev` reserved, not implemented |
 | `run_eval.py` | Runner: `--mode vector bm25 hybrid`, `--reranker none` |
 | `compare.py` | Side-by-side table of two result files, incl. the new run on the old query set |
+| `rescore.py` | Recomputes all metrics offline from stored rankings → `*.rescored.json` |
+| `analysis.py` | Distractor-intrusion counts and per-query RRF traces from stored rankings |
 | `results/` | Timestamped JSON (config snapshot + per-query rankings) and Markdown tables |
+| `reports/` | Written reports; every table is pasted from the scripts above |
 
 ## Corpus rounds
 
@@ -46,6 +49,8 @@ on every run, so the snapshot always matches the chunk parameters used.
 - Ranking unit is the chunk, mapped to its draft id; labels are per draft.
 - Recall@5: distinct relevant drafts in the top 5 chunks / relevant drafts.
 - MRR@10: mean of 1/rank of the first relevant chunk in the top 10 (0 if none).
+- Precision@5: relevant chunks in the top 5 / 5.
+- nDCG@5: binary gain; ideal = min(5, indexed chunks of the relevant draft).
 - Rejection queries (empty labels) are excluded from Recall/MRR means and
   scored as rejection rate: correct iff the retriever returns nothing.
 - Latency: wall clock per query, warm-up excluded; vector and hybrid include
