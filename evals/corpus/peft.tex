@@ -1,0 +1,90 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Not a real paper; contains no experimental results.
+\documentclass{article}
+\title{Rank-Adaptive Low-Rank Adapters for Parameter-Efficient Fine-Tuning of Large Language Models}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Full fine-tuning of large language models updates billions of parameters and
+requires storing a separate copy of the model for every downstream task.
+Parameter-efficient fine-tuning (PEFT) methods such as LoRA, adapters, prefix
+tuning and BitFit freeze the pretrained backbone and train only a small number
+of additional parameters. This draft proposes a rank-adaptive variant of
+low-rank adaptation that allocates the rank budget across transformer layers
+according to a sensitivity score computed during training, and studies how it
+interacts with 4-bit quantized backbones.
+\end{abstract}
+
+\section{Introduction}
+Pretrained transformer language models are routinely adapted to instruction
+following, summarization, code generation and domain-specific question
+answering. Updating all weights of a model with tens of billions of parameters
+is expensive in GPU memory, optimizer state and storage. Parameter-efficient
+fine-tuning addresses this by keeping the pretrained weights frozen and
+learning a compact task-specific update.
+
+Low-rank adaptation (LoRA) injects a trainable low-rank decomposition
+$\Delta W = BA$ into the attention projection matrices, where
+$B \in \mathbb{R}^{d \times r}$, $A \in \mathbb{R}^{r \times k}$ and the rank
+$r$ is much smaller than $d$ and $k$. After training the update can be merged
+into the frozen weight, so inference latency is unchanged. A known limitation
+is that a single global rank is used for every layer, although layers differ
+in how much they need to change for a given task.
+
+Our contributions are: (1) a sensitivity-guided rank allocation scheme that
+grows and prunes the rank of each LoRA module during fine-tuning under a fixed
+total parameter budget; (2) an analysis of rank allocation when the backbone is
+quantized to 4-bit NormalFloat, as in QLoRA; and (3) a planned evaluation
+protocol on instruction tuning and commonsense reasoning benchmarks.
+
+\section{Related Work}
+Adapters insert small bottleneck feed-forward modules between transformer
+sublayers. Prefix tuning and prompt tuning prepend trainable continuous vectors
+to the keys and values or to the input embeddings. BitFit trains only the bias
+terms. LoRA and its variants reparameterize the weight update as a low-rank
+product. AdaLoRA parameterizes the update with a singular value decomposition
+and prunes singular values by importance. QLoRA backpropagates through a frozen
+4-bit quantized model into LoRA adapters, enabling fine-tuning of very large
+models on a single GPU. DoRA decomposes weights into magnitude and direction
+components. Our work is closest to AdaLoRA but differs in that ranks can also
+grow, not only shrink.
+
+\section{Method}
+\subsection{Sensitivity Score}
+For each LoRA module $m$ we maintain an exponential moving average of
+$|\theta \cdot \nabla_\theta \mathcal{L}|$ over its parameters, which
+approximates the change in loss if the module were removed. Modules with high
+sensitivity are candidates for rank growth.
+
+\subsection{Rank Budget Reallocation}
+Every $T$ optimizer steps, we rank all modules by sensitivity. The lowest
+scoring modules have their rank reduced by pruning the column of $B$ and the
+row of $A$ with the smallest norm product; the freed budget is given to the
+highest scoring modules by appending newly initialized rank-one components,
+with $B$ initialized to zero so that the model output is unchanged at the moment
+of growth. The total number of trainable parameters is held constant.
+
+\subsection{Interaction with Quantization}
+When the frozen backbone is quantized, quantization error acts as a fixed
+perturbation of the pretrained weights. We hypothesize that layers with larger
+quantization error receive larger rank under our scheme, and we plan to
+measure the correlation between per-layer quantization error and allocated
+rank.
+
+\section{Experimental Plan}
+We plan to fine-tune decoder-only models of several sizes on instruction
+tuning data and evaluate on commonsense reasoning and reading comprehension
+benchmarks. Baselines are full fine-tuning, LoRA with a uniform rank, AdaLoRA,
+adapters and prefix tuning, all at matched trainable parameter counts. We will
+report task accuracy, peak GPU memory, number of trainable parameters and
+wall-clock training time. Ablations will vary the reallocation interval $T$,
+the total rank budget and whether growth is enabled.
+
+\section{Limitations}
+The sensitivity score adds a small overhead per step. Rank changes alter the
+optimizer state shape, which requires resetting the Adam moments of the
+affected components. The approach has only been designed for attention and
+MLP projection matrices in transformer language models.
+
+\end{document}

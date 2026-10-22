@@ -1,0 +1,79 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Not a real paper; contains no experimental results.
+\documentclass{article}
+\title{Mitigating Over-Smoothing and Over-Squashing in Deep Message-Passing Graph Neural Networks}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Message-passing graph neural networks (GNNs) learn node representations by
+iteratively aggregating features from neighbouring nodes. Stacking many layers
+should enlarge the receptive field, but in practice deep GNNs suffer from
+over-smoothing, where node embeddings become indistinguishable, and
+over-squashing, where information from distant nodes is compressed through
+structural bottlenecks. This draft proposes a curvature-guided graph rewiring
+step combined with an initial-residual connection, and outlines an evaluation
+on node classification and graph-level property prediction.
+\end{abstract}
+
+\section{Introduction}
+Graphs model relational data such as citation networks, social networks,
+molecules and knowledge graphs. Graph neural networks generalize convolution to
+irregular graph structure: in each layer, every node aggregates messages from
+its neighbours and updates its hidden state. Graph convolutional networks
+(GCN), GraphSAGE, graph attention networks (GAT) and graph isomorphism
+networks (GIN) are widely used instances of this message-passing paradigm.
+
+Two failure modes limit depth. Over-smoothing arises because repeated
+neighbourhood averaging behaves like a low-pass filter on the graph Laplacian,
+driving node features toward a common subspace. Over-squashing arises because
+the number of nodes in a $k$-hop neighbourhood grows exponentially, while the
+messages passed across a bottleneck edge have fixed dimension. Long-range
+dependencies, which are common in molecular graphs, are therefore poorly
+captured.
+
+Our contributions are: (1) a rewiring procedure that adds edges across
+negatively curved bottleneck edges, measured by a discrete Ricci curvature,
+and removes edges in highly positively curved regions; (2) an initial-residual
+message-passing layer that mixes each layer's output with the input features
+to slow over-smoothing; and (3) a study of the trade-off between the two
+phenomena as depth increases.
+
+\section{Related Work}
+Over-smoothing has been analysed through the spectrum of the normalized
+adjacency matrix, and mitigated with residual connections, jumping knowledge
+networks, PairNorm, DropEdge and APPNP-style personalized PageRank
+propagation. Over-squashing was linked to the Jacobian sensitivity between
+distant nodes and to negative Ricci curvature, motivating graph rewiring
+methods such as SDRF and spectral approaches based on the Cheeger constant.
+Graph transformers sidestep both issues with global attention but at quadratic
+cost in the number of nodes. Expressive power of message passing is bounded by
+the Weisfeiler--Lehman graph isomorphism test.
+
+\section{Method}
+\subsection{Curvature-Guided Rewiring}
+We compute the balanced Forman curvature of every edge once before training.
+For the most negatively curved edges, we add a supporting edge between
+neighbours of the two endpoints that maximally increases curvature. To keep
+the edge count roughly constant and avoid creating new over-smoothing, we
+remove edges whose curvature exceeds an upper threshold.
+
+\subsection{Initial-Residual Message Passing}
+Each layer computes $H^{(l+1)} = \sigma\big((1-\beta)\hat{A}H^{(l)} +
+\beta H^{(0)}\big)W^{(l)}$, where $\hat{A}$ is the normalized adjacency of the
+rewired graph and $\beta$ controls how much of the input signal is preserved.
+
+\section{Experimental Plan}
+We plan to evaluate on homophilous citation graphs, heterophilous web graphs
+and molecular property prediction datasets that require long-range
+interactions. Baselines include GCN, GAT, GIN, GCNII, DropEdge, SDRF rewiring
+and a graph transformer. We will vary depth from 2 to 64 layers and measure
+accuracy together with the Dirichlet energy of node embeddings as an
+over-smoothing diagnostic.
+
+\section{Limitations}
+Curvature computation scales with the number of edges times node degree,
+which is costly on very large graphs. Rewiring changes the input topology,
+which may be undesirable when edges carry semantic meaning.
+
+\end{document}

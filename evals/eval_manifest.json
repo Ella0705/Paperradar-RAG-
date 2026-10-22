@@ -1,0 +1,10 @@
+{
+  "papers": [],
+  "sources": [
+    {"path": "evals/corpus/peft.tex", "id": "peft", "source": "eval-corpus", "type": "local"},
+    {"path": "evals/corpus/rl_trading.tex", "id": "rl_trading", "source": "eval-corpus", "type": "local"},
+    {"path": "evals/corpus/gnn.tex", "id": "gnn", "source": "eval-corpus", "type": "local"},
+    {"path": "evals/corpus/diffusion.tex", "id": "diffusion", "source": "eval-corpus", "type": "local"},
+    {"path": "evals/corpus/fedlearn.tex", "id": "fedlearn", "source": "eval-corpus", "type": "local"}
+  ]
+}

@@ -1,0 +1,83 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Not a real paper; contains no experimental results.
+\documentclass{article}
+\title{Personalized Federated Learning under Non-IID Client Data with Differential Privacy}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Federated learning trains a shared model across many clients, such as mobile
+devices or hospitals, without centralizing their raw data. When client data
+distributions are heterogeneous (non-IID), federated averaging converges slowly
+and the global model can perform poorly on individual clients. This draft
+proposes a personalized federated learning method that splits each model into
+a shared representation and a client-specific head, adds client-level
+differential privacy to the shared updates, and reduces communication with
+update compression.
+\end{abstract}
+
+\section{Introduction}
+In cross-device federated learning, a central server coordinates training over
+a large population of clients that hold private local datasets. In each
+communication round the server samples a subset of clients, sends them the
+current global model, each client runs several steps of local stochastic
+gradient descent, and the server aggregates the returned updates. The
+canonical algorithm is federated averaging (FedAvg).
+
+Three practical issues motivate this work. First, statistical heterogeneity:
+clients have different label distributions and feature shifts, causing client
+drift during local training. Second, privacy: model updates can leak
+information about local data through gradient inversion and membership
+inference attacks, so secure aggregation and differential privacy are needed.
+Third, communication: uplink bandwidth from edge devices is limited and
+clients participate intermittently.
+
+Our contributions are: (1) a personalized FedAvg variant in which only the
+shared feature extractor is aggregated while each client keeps a local
+classification head; (2) client-level differential privacy applied only to the
+shared component, with per-client update clipping and Gaussian noise added at
+the server; and (3) top-$k$ sparsification with error feedback for uplink
+compression.
+
+\section{Related Work}
+FedAvg was introduced for communication-efficient learning from decentralized
+data. FedProx adds a proximal term to limit client drift, and SCAFFOLD uses
+control variates to correct it. Personalized federated learning includes local
+fine-tuning, meta-learning approaches such as Per-FedAvg, FedRep and FedBN,
+which keep heads or normalization layers local, and clustered federated
+learning. DP-FedAvg provides user-level differential privacy guarantees via
+update clipping and noise. Secure aggregation lets the server see only the sum
+of client updates. Gradient compression methods include quantization and
+sparsification with error accumulation.
+
+\section{Method}
+\subsection{Shared Representation and Local Heads}
+Each client model is $h_i \circ \phi$, where $\phi$ is the shared encoder and
+$h_i$ is the local head. In each round, the client first updates $h_i$ for a few
+epochs with $\phi$ frozen, then updates $\phi$ for a few steps, and uploads only
+the change in $\phi$.
+
+\subsection{Client-Level Differential Privacy}
+Each uploaded encoder update is clipped to norm $C$. The server averages the
+clipped updates of the sampled clients and adds Gaussian noise with standard
+deviation proportional to $C$. Privacy loss across rounds is tracked with a
+R\'enyi differential privacy accountant under client subsampling.
+
+\subsection{Communication Compression}
+Clients transmit only the top-$k$ coordinates of their clipped update and keep
+the residual locally, adding it to the next round's update.
+
+\section{Experimental Plan}
+We plan to simulate federated settings with Dirichlet label skew over image
+classification datasets and natural user partitions of text datasets.
+Baselines are FedAvg, FedProx, SCAFFOLD, FedRep and local-only training. We
+will report average and worst-client accuracy, the privacy budget
+$\varepsilon$, and total uplink bytes, as functions of the number of rounds and
+the client participation rate.
+
+\section{Limitations}
+Keeping heads local means new clients need a warm-up phase. Differential
+privacy noise grows relative to the signal when few clients participate per
+round. The method assumes an honest-but-curious server.
+
+\end{document}

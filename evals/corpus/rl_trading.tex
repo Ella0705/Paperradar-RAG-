@@ -1,0 +1,86 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Not a real paper; contains no experimental results.
+\documentclass{article}
+\title{Risk-Constrained Deep Reinforcement Learning for Portfolio Allocation and Order Execution}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study deep reinforcement learning agents for two financial decision
+problems: allocating capital across a basket of equities and executing large
+orders in a limit order book with minimal market impact. Standard reward
+formulations that maximize cumulative return lead to policies with excessive
+drawdowns and turnover. This draft formulates trading as a constrained Markov
+decision process with a conditional value-at-risk constraint and transaction
+costs, and proposes a Lagrangian actor-critic method trained in a market
+simulator calibrated to historical data.
+\end{abstract}
+
+\section{Introduction}
+Algorithmic trading systems must make sequential decisions under uncertainty:
+how much of each asset to hold, when to rebalance, and how to split a large
+parent order into child orders over time. Reinforcement learning (RL) is a
+natural fit because the agent's actions influence future states through
+transaction costs, inventory and price impact.
+
+However, applying deep RL to trading raises specific difficulties. Financial
+returns are non-stationary and have a low signal-to-noise ratio, so agents
+overfit easily to the backtest period. Rewards based purely on profit and loss
+ignore risk, and a policy that is profitable on average may suffer
+unacceptable drawdowns. Finally, realistic execution requires modelling the
+limit order book, slippage and the agent's own market impact.
+
+Our contributions are: (1) a constrained MDP formulation of portfolio
+allocation with a CVaR constraint on episode returns and proportional
+transaction costs; (2) a Lagrangian proximal policy optimization (PPO) agent
+with a distributional critic that estimates the return quantiles needed for
+the CVaR constraint; and (3) a walk-forward backtesting protocol designed to
+reduce look-ahead bias.
+
+\section{Related Work}
+Early work applied recurrent reinforcement learning to optimize the Sharpe
+ratio directly. Deep Q-networks and policy gradient methods have since been
+used for single-asset trading, and actor-critic methods such as DDPG, PPO and
+SAC for continuous portfolio weights. Optimal execution has a long history in
+the Almgren--Chriss framework, and RL approaches learn execution schedules from
+limit order book features. Risk-sensitive RL optimizes objectives such as
+mean-variance or CVaR, and constrained RL methods use Lagrangian relaxation to
+enforce cost constraints. Distributional RL learns the full return
+distribution rather than its mean.
+
+\section{Problem Formulation}
+\subsection{State, Action and Reward}
+The state contains a window of past log returns, technical indicators, current
+portfolio weights and cash. The action is a vector of target portfolio weights
+on the probability simplex. The reward at each step is the log portfolio
+return net of proportional transaction costs on the traded volume.
+
+\subsection{Risk Constraint}
+We require the conditional value-at-risk at level $\alpha$ of the episode
+return to stay above a threshold. The constrained objective is relaxed with a
+Lagrange multiplier that is updated by dual gradient ascent.
+
+\section{Method}
+The policy and critic share a temporal convolutional encoder over the return
+window. The critic is a quantile network that outputs a set of return
+quantiles, from which the CVaR of the current policy is estimated. The actor is
+trained with the PPO clipped objective on the Lagrangian reward. For order
+execution, the same agent architecture acts on limit order book snapshots and
+chooses the size and price level of child orders, with a penalty for unfilled
+inventory at the end of the horizon.
+
+\section{Experimental Plan}
+We plan to train in a market simulator replaying historical daily equity data
+and a limit order book simulator with an agent-based price impact model.
+Evaluation will use walk-forward splits in which the agent is retrained on an
+expanding window and tested on the following period. Baselines include
+equal-weight and mean-variance portfolios, unconstrained PPO and SAC, and the
+Almgren--Chriss execution schedule. Metrics are annualized return, Sharpe
+ratio, maximum drawdown, turnover and implementation shortfall.
+
+\section{Limitations}
+Simulator calibration determines how well policies transfer to live markets,
+and agent-based impact models may not capture rare liquidity events. The
+backtest cannot account for the agent's effect on other market participants.
+
+\end{document}
