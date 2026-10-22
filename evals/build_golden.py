@@ -47,6 +47,25 @@ PINNED: list[tuple[str, str, list[str]]] = [
     ("q18", "1310.2110v1", []),               # q-bio.PE: scaling in ecology
     ("q19", "2306.11935v1", []),              # cond-mat: superconducting diode
     ("q20", "1912.13313v1", []),              # hep-ph: neutrino decoherence
+    # Boundary queries between an original draft and its near-topic distractor.
+    # peft vs llm_quant: LoRA fine-tuning with quantization -> peft;
+    # training-free quantization (even with low-rank terms) -> llm_quant.
+    ("q21", "2309.14717v2", ["peft"]),        # QA-LoRA
+    ("q22", "2310.08659v4", ["peft"]),        # LoftQ
+    ("q23", "2402.02446v3", ["llm_quant"]),   # LQER: low-rank PTQ error reconstruction
+    ("q24", "2303.08302v3", ["llm_quant"]),   # ZeroQuant-V2: PTQ study + low-rank compensation
+    # diffusion vs gan: adversarial distillation of a diffusion model -> diffusion;
+    # GAN generators positioned against diffusion -> gan.
+    ("q25", "2402.13929v3", ["diffusion"]),   # SDXL-Lightning
+    ("q26", "2507.18569v1", ["diffusion"]),   # Adversarial Distribution Matching
+    ("q27", "2301.09515v1", ["gan"]),         # StyleGAN-T
+    ("q28", "2501.00116v1", ["gan"]),         # TIGER: text-to-image GAN
+    # rl_trading vs marl: multi-agent RL in financial markets -> rl_trading;
+    # multi-agent RL in games / coordination -> marl.
+    ("q29", "1812.10252v1", ["rl_trading"]),  # Market making with MARL
+    ("q30", "2511.02136v1", ["rl_trading"]),  # JaxMARL-HFT
+    ("q31", "2604.04983v1", ["marl"]),        # Territory Paint Wars: competitive MA-PPO
+    ("q32", "2302.05063v1", ["marl"]),        # Zero-shot coordination via policy similarity
 ]
 
 
