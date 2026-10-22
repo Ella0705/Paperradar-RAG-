@@ -1,3 +1,14 @@
 {
-  "papers": []
+  "_note": "DEMO CORPUS: the 8 sources below are synthetic drafts from evals/corpus/, registered so LocalOverlap has something to match in the demo. Replace them with your real Overleaf / GitHub materials (source enrollment + sync rewrites this file), then rebuild the index with `python -m triage_agent.rag.build_index`.",
+  "papers": [],
+  "sources": [
+    {"path": "evals/corpus/peft.tex", "id": "peft", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/rl_trading.tex", "id": "rl_trading", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/gnn.tex", "id": "gnn", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/diffusion.tex", "id": "diffusion", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/fedlearn.tex", "id": "fedlearn", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/llm_quant.tex", "id": "llm_quant", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/gan.tex", "id": "gan", "source": "synthetic-demo", "type": "local"},
+    {"path": "evals/corpus/marl.tex", "id": "marl", "source": "synthetic-demo", "type": "local"}
+  ]
 }
