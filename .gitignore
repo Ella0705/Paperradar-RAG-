@@ -38,3 +38,6 @@ skill/memory/sources.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Eval-only Chroma index (rebuilt by evals/run_eval.py)
+evals/.index/
