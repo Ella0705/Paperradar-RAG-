@@ -1,0 +1,80 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Near-topic distractor for rl_trading.tex. Not a real paper; contains no results.
+\documentclass{article}
+\title{Population-Based Self-Play for Cooperative and Competitive Multi-Agent Reinforcement Learning in Games}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Multi-agent reinforcement learning (MARL) studies several agents that learn
+simultaneously in a shared environment, cooperating, competing, or both. From
+the perspective of any single agent the environment is non-stationary because
+the other agents' policies keep changing. This draft proposes a
+population-based self-play method with a centralized value function for mixed
+cooperative-competitive games, and plans an evaluation on team-based
+real-time strategy micromanagement, simulated football and imperfect
+information card games.
+\end{abstract}
+
+\section{Introduction}
+Many sequential decision problems involve several interacting decision makers:
+teams of units in strategy games, players in sports simulations, and players
+in poker or cooperative card games. MARL extends single-agent reinforcement
+learning to a Markov game, in which the transition and reward depend on the
+joint action of all agents. Solution concepts come from game theory: in
+zero-sum games the target is a Nash equilibrium, while in cooperative games
+the goal is to maximize a shared team reward.
+
+Three challenges arise. Non-stationarity: each agent's learning changes the
+environment for the others, which breaks the convergence assumptions of
+independent learners. Credit assignment: in cooperative settings with a single
+team reward, an agent cannot easily tell how its own action contributed.
+Cycling and exploitability: naive self-play against the latest policy can
+cycle between strategies in non-transitive games instead of improving.
+
+Our contributions are: (1) a centralized-training, decentralized-execution
+actor-critic in which each agent's policy uses only local observations, while a
+centralized critic conditions on the global state and all actions; (2) a
+population of policies trained with prioritized fictitious self-play, where
+opponents are sampled from the population by their win rate against the
+learner; and (3) an exploitability-based evaluation protocol.
+
+\section{Related Work}
+Independent Q-learning treats other agents as part of the environment.
+Centralized training with decentralized execution underlies MADDPG, COMA, which
+uses a counterfactual baseline for credit assignment, and value factorization
+methods such as VDN and QMIX, which decompose the team value into per-agent
+utilities. MAPPO showed that PPO with a centralized value function is a strong
+baseline on cooperative benchmarks. In competitive games, fictitious play,
+policy-space response oracles and league training with self-play reached
+expert level in Go, poker and StarCraft. Emergent communication and opponent
+modelling are related lines of work.
+
+\section{Method}
+\subsection{Centralized Critic}
+Each agent $i$ has a policy $\pi_i(a_i \mid o_i)$ over its local observation.
+The critic $V(s)$ takes the global state and is trained with generalized
+advantage estimation; agents in the same team share the critic, and policies
+are updated with the PPO clipped objective.
+
+\subsection{Population and Opponent Sampling}
+We maintain a population of past and current policies. For each training
+episode, the opposing team is drawn from the population with probability
+proportional to a function of the learner's loss rate against it, which
+focuses training on opponents the learner cannot yet beat and prevents
+forgetting.
+
+\section{Experimental Plan}
+We plan to evaluate on StarCraft multi-agent micromanagement scenarios, a
+simulated football environment, and the cooperative card game Hanabi, plus a
+two-team competitive gridworld. Baselines are independent PPO, MAPPO, QMIX and
+naive self-play. Metrics are win rate, team return, and approximate
+exploitability measured by training a best-response agent against frozen
+policies.
+
+\section{Limitations}
+Population training multiplies compute. Exploitability can only be estimated
+approximately in large games, and centralized critics assume the global state
+is available during training.
+
+\end{document}

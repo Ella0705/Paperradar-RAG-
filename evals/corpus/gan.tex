@@ -1,0 +1,83 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Near-topic distractor for diffusion.tex. Not a real paper; contains no results.
+\documentclass{article}
+\title{Stabilizing Large-Scale Generative Adversarial Networks for Text-Conditioned Image Synthesis}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Generative adversarial networks (GANs) synthesize an image in a single forward
+pass of the generator, which makes them attractive for real-time and
+interactive applications. Scaling GANs to large, diverse, text-conditioned
+datasets has proven difficult because adversarial training becomes unstable
+and suffers from mode collapse. This draft proposes a regularized training
+recipe for a style-based generator with a projected multi-scale discriminator,
+aiming to scale adversarial training to open-domain text-to-image generation.
+\end{abstract}
+
+\section{Introduction}
+A GAN trains two networks in a minimax game: a generator maps a latent noise
+vector to an image, and a discriminator tries to distinguish generated images
+from real ones. At equilibrium the generator distribution matches the data
+distribution. Style-based generators produce high-resolution, photorealistic
+faces and objects on curated single-domain datasets, and sampling requires
+only one network evaluation.
+
+Training remains fragile. The discriminator can overpower the generator,
+gradients vanish, and the generator may cover only a few modes of the data,
+producing low diversity. These problems become worse as dataset diversity and
+model size grow, and conditioning on free-form text adds a second objective:
+generated images must not only look real but also match the caption.
+
+Our contributions are: (1) a training recipe that combines gradient penalties
+on real data, spectral normalization of the discriminator and adaptive
+discriminator augmentation to keep the game balanced at scale; (2) a projected
+discriminator that operates on features of a frozen pretrained vision encoder
+at several resolutions, with a text-image matching head; and (3) a study of
+how generator capacity and discriminator capacity should grow together.
+
+\section{Related Work}
+The original GAN formulation was followed by DCGAN, which introduced
+convolutional architectures, and by Wasserstein GANs with gradient penalty,
+which replaced the Jensen--Shannon objective with an Earth mover distance.
+Spectral normalization constrains the discriminator's Lipschitz constant.
+Progressive growing, BigGAN and the StyleGAN family improved fidelity through
+architecture and scale; StyleGAN introduced a mapping network and per-layer
+style modulation. Projected GANs use pretrained feature networks inside the
+discriminator. Conditional GANs condition on class labels or text via
+projection discriminators. Mode collapse has been studied through minibatch
+discrimination and unrolled optimization. Likelihood-based and score-based
+generative models are slower to sample and are not the focus here.
+
+\section{Method}
+\subsection{Generator}
+The generator follows a style-based design: a mapping network transforms the
+latent code and a pooled text embedding into a style vector, which modulates
+the convolution weights at each resolution. Cross-attention layers at
+intermediate resolutions attend to per-token text embeddings.
+
+\subsection{Discriminator}
+Real and generated images are encoded by a frozen pretrained vision backbone.
+Lightweight discriminator heads operate on feature maps at four scales and
+output a realism logit; a separate head scores image-text agreement.
+
+\subsection{Regularization}
+We apply an $R_1$ gradient penalty on real images, spectral normalization in
+the discriminator heads, and adaptive augmentation whose probability is
+adjusted from the discriminator's overfitting signal. The non-saturating
+logistic loss is used for both networks.
+
+\section{Experimental Plan}
+We plan to train on a large image-caption dataset and evaluate at 64 and 256
+pixel resolution. Metrics are Fréchet Inception Distance, precision and recall
+for generative models to separate fidelity from diversity, CLIP score for text
+alignment, and generation time per image. Baselines include StyleGAN-T,
+GigaGAN-style models and projected GANs. Ablations remove each regularizer.
+
+\section{Limitations}
+Adversarial training requires careful hyperparameter tuning, and the frozen
+feature network may bias the discriminator toward the features it was trained
+on. Fine-grained text compositionality remains challenging for single-pass
+generators.
+
+\end{document}

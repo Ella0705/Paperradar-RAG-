@@ -1,0 +1,88 @@
+% SYNTHETIC EVALUATION DRAFT — written for the retrieval eval in evals/.
+% Near-topic distractor for peft.tex. Not a real paper; contains no results.
+\documentclass{article}
+\title{Outlier-Aware Post-Training Quantization and Sparsity for Efficient LLM Inference}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Serving large language models is bounded by memory capacity and memory
+bandwidth: at batch size one, decoding a token requires reading every weight
+from GPU memory. Compressing a trained model to low bit-width weights and
+activations reduces both. This draft proposes a post-training quantization
+method that requires no gradient updates, handles the activation outliers that
+emerge in large transformers, and combines 4-bit weights with 2:4 structured
+sparsity and an 8-bit key-value cache to accelerate inference.
+\end{abstract}
+
+\section{Introduction}
+Large language models with tens of billions of parameters do not fit on a
+single accelerator in 16-bit precision, and their autoregressive decoding is
+memory-bound. Model compression lowers the cost of deployment without
+retraining. Post-training quantization (PTQ) maps a trained model's weights,
+and optionally its activations, to low-precision integers using only a small
+calibration set, in contrast to quantization-aware training, which simulates
+quantization during a full training run.
+
+Two obstacles make PTQ of large transformers hard. First, a small number of
+hidden dimensions carry activation outliers with magnitudes far larger than
+the rest, so a per-tensor activation scale wastes most of the integer range.
+Second, rounding each weight to its nearest grid point independently ignores
+correlations between weights, and errors accumulate across layers at 3 and 4
+bits.
+
+Our contributions are: (1) an outlier-aware scheme that migrates activation
+scale into the weights per channel before quantization, enabling 8-bit
+activations; (2) a second-order weight quantizer that quantizes columns
+sequentially and updates the remaining columns to compensate for rounding
+error, using a Hessian estimated from calibration activations; and (3) joint
+4-bit quantization with 2:4 semi-structured pruning, plus an 8-bit KV cache, so
+that the model runs with fast integer and sparse tensor-core kernels.
+
+\section{Related Work}
+LLM.int8() keeps outlier feature dimensions in 16-bit and quantizes the rest
+to 8-bit. SmoothQuant migrates quantization difficulty from activations to
+weights with a per-channel scaling. GPTQ quantizes weights column by column
+with an approximate second-order update derived from Optimal Brain
+Quantization. AWQ protects salient weight channels identified from activation
+statistics. SpQR and SqueezeLLM store sensitive weights at higher precision.
+SparseGPT prunes large models in one shot with a related second-order
+reconstruction. KV cache quantization reduces memory for long contexts. Our
+method targets the inference-only setting and does not train any parameters.
+
+\section{Method}
+\subsection{Calibration}
+We run a few hundred calibration sequences through the full-precision model
+and record per-channel activation maxima and the input Gram matrix of every
+linear layer.
+
+\subsection{Outlier Migration}
+For each linear layer we choose per-input-channel scales $s$ such that
+$Y = (X\,\mathrm{diag}(s)^{-1})(\mathrm{diag}(s)\,W)$, balancing the dynamic
+range between activations and weights. Activations are then quantized to INT8
+per token and weights to INT4 per group of 128 channels.
+
+\subsection{Error-Compensating Weight Rounding}
+Columns are quantized in order of decreasing Hessian diagonal. After each
+column is rounded, the residual error is distributed onto the not-yet-quantized
+columns using the inverse Hessian, which keeps the layer's output close to the
+full-precision output on calibration data.
+
+\subsection{Structured Sparsity and KV Cache}
+Within the same pass we enforce a 2:4 sparsity pattern by removing the two
+weights with the smallest saliency in every group of four. Keys and values are
+stored in INT8 with per-head scales.
+
+\section{Experimental Plan}
+We plan to compress open decoder-only language models of several sizes and
+measure perplexity on held-out text, zero-shot accuracy on reasoning
+benchmarks, and end-to-end decoding throughput and latency on a single GPU.
+Baselines are round-to-nearest, LLM.int8(), SmoothQuant, GPTQ, AWQ and
+SparseGPT at matched bit-widths and sparsity.
+
+\section{Limitations}
+Calibration data that differs from deployment traffic can bias the scales.
+Speed-ups depend on kernel support for mixed INT4 and sparse formats, and
+quantizing below 3 bits remains lossy for smaller models.
+
+\end{document}
